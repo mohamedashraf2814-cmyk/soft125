@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نظام المراقبة الذكي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5" stroke-dasharray="2 3"/></symbol>
+    <symbol id="i-zone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 7l7-3 9 4-2 11-12 1z"/><path d="M12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="9" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/></symbol>
+    <symbol id="i-usb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v15M9 6l3-3 3 3M12 13l-4-2V8M12 15l4-2v-2"/><circle cx="12" cy="19.5" r="1.8"/></symbol>
+    <symbol id="i-net" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M10 12l4 2.5-4 2.5z"/></symbol>
+    <symbol id="i-rec" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="7" cy="12" r="1.5"/><path d="M11 12h7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"/></symbol>
+    <symbol id="i-step" viewBox="0 0 24 24" fill="currentColor"><path d="M15 4.5v15L5 12z"/><rect x="17" y="4.5" width="3" height="15" rx="1"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-pres" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>نظام المراقبة الذكي</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">القائمة</button>
+    <nav class="links" id="navLinks" aria-label="أقسام الموقع">
+      <a href="#about">الفكرة</a>
+      <a href="#arch">المعمارية</a>
+      <a href="#pipeline">مسار المعالجة</a>
+      <a href="#sim">المحاكي</a>
+      <a href="#camera">ربط الكاميرا</a>
+      <a href="#dashboard">لوحة التحكم</a>
+      <a href="#zones">المناطق</a>
+      <a href="#tech">التقنيات</a>
+      <a href="#db">قاعدة البيانات</a>
+      <a href="#api">API</a>
+      <a href="#testing">الاختبار</a>
+      <a href="#limits">القيود</a>
+    </nav>
+    <button class="btn sm primary btn-pres" id="presOpen"><svg><use href="#i-pres"/></svg>وضع العرض</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- A — HERO -->
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow">مشروع تخرج · رؤية حاسوبية</div>
+      <h1 style="margin-top:14px">نظام مراقبة ذكي <em>باستخدام الذكاء الاصطناعي</em></h1>
+      <p class="sub">من الكاميرا إلى اكتشاف الأجسام وتتبع الحركة وتحليل الأحداث في الوقت الفعلي.</p>
+      <div class="cta">
+        <a class="btn primary" href="#about">اكتشف المشروع</a>
+        <a class="btn" href="#arch"><svg><use href="#i-play"/></svg>شاهد كيف يعمل</a>
+      </div>
+      <div class="stack">
+        <span class="chip">YOLO</span><span class="chip">OpenCV</span><span class="chip">ByteTrack</span><span class="chip">React</span><span class="chip">Laravel</span><span class="chip">MySQL</span>
+      </div>
+    </div>
+    <div class="feed" aria-label="عرض توضيحي متحرك لكاميرا مراقبة">
+      <div class="feed-bar ltr">
+        <span class="rec"></span><span>CAM-01 · Gate</span><span class="sp"></span>
+        <span class="proc"><span class="bars"><span></span><span></span><span></span><span></span></span>AI processing</span>
+        <span id="heroFrame">frame 000000</span>
+      </div>
+      <canvas id="heroCanvas" width="960" height="600"></canvas>
+      <span class="sim-flag">عرض توضيحي متحرك — ليس بثاً حقيقياً</span>
+    </div>
+  </div>
+</section>
+
+<!-- B — WHAT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">ما هو المشروع</div>
+      <h2>ست مراحل تحوّل الفيديو إلى معلومات</h2>
+      <p>يستقبل النظام فيديو من كاميرا أو ملف مسجّل، ويعالج إطاراته بالرؤية الحاسوبية ونموذج ذكاء اصطناعي لاكتشاف الأجسام. ثم يتتبع كل جسم عبر الإطارات، ويفحص المناطق والخطوط الافتراضية المحددة، ويسجّل الأحداث المهمة، ويعرض النتائج في لوحة تحكم.</p>
+    </div>
+    <div class="concepts" id="concepts"></div>
+    <div class="glass concept-detail" id="conceptDetail"></div>
+  </div>
+</section>
+
+<!-- C — ARCHITECTURE -->
+<section id="arch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">معمارية النظام</div>
+      <h2>كيف تتحرك البيانات بين المكوّنات</h2>
+      <p>الإطارات تبقى داخل خدمة المعالجة بلغة Python، ولا يمر الفيديو الكامل عبر Laravel. ما يُرسل إلى الخادم هو بيانات منظمة صغيرة: الأحداث والإحصائيات. اضغط على أي مكوّن لمعرفة دوره.</p>
+    </div>
+    <div class="arch">
+      <div class="glass arch-stage">
+        <div class="arch-ctrl">
+          <button class="btn sm primary" id="archPlay"><svg><use href="#i-play"/></svg><span>تشغيل</span></button>
+          <button class="btn sm" id="archStep"><svg><use href="#i-step"/></svg>خطوة بخطوة</button>
+          <button class="btn sm" id="archRestart"><svg><use href="#i-reset"/></svg>من البداية</button>
+          <span class="sp"></span>
+          <span class="chip mono" id="archCounter">0 / 9</span>
+        </div>
+        <svg class="arch-svg" id="archSvg" role="img" aria-label="مخطط معمارية النظام"></svg>
+        <div class="arch-caption" id="archCaption"><span class="k">جاهز</span><span>اضغط «تشغيل» لمشاهدة رحلة البيانات من الكاميرا حتى لوحة التحكم.</span></div>
+        <div class="legend" id="archLegend"></div>
+      </div>
+      <aside class="glass panel" id="archPanel" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
+<!-- D — PIPELINE -->
+<section id="pipeline">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">مسار معالجة الإطار</div>
+      <h2>ماذا يحدث لإطار واحد من لحظة التقاطه</h2>
+      <p>تنقّل بين المراحل الثماني. كل مرحلة تعرض ما تستقبله وما تُخرجه، بمثال توضيحي للبيانات.</p>
+    </div>
+    <div class="pipe">
+      <div class="glass steps" id="pipeSteps" role="tablist" aria-label="مراحل المعالجة"></div>
+      <div class="glass pipe-main">
+        <div class="progress"><span id="pipeProg" style="width:12.5%"></span></div>
+        <div class="pipe-top">
+          <h3 id="pipeTitle"></h3>
+          <div class="ctrl-row">
+            <button class="btn sm" id="pipePrev"><svg><use href="#i-prev"/></svg>السابق</button>
+            <button class="btn sm primary" id="pipeNext">التالي<svg><use href="#i-next"/></svg></button>
+          </div>
+        </div>
+        <div class="pipe-vis" id="pipeVis"></div>
+        <p class="pipe-desc" id="pipeDesc"></p>
+        <div class="io-grid">
+          <div><span class="lbl">INPUT · المدخلات</span><pre class="code" id="pipeIn"></pre></div>
+          <div><span class="lbl">OUTPUT · المخرجات</span><pre class="code" id="pipeOut"></pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E — SIMULATOR -->
+<section id="sim">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">محاكي المراقبة</div>
+      <h2>جرّب الكشف والتتبع والقواعد بنفسك</h2>
+      <p>كل رقم وكل حدث هنا يُحسب من حالة المحاكاة الفعلية: موضع كل جسم، وعبوره للخط، ودخوله المنطقة.</p>
+    </div>
+    <div class="note" style="margin-bottom:14px"><span><b>محاكاة تعليمية</b> — البيانات المعروضة تجريبية وليست ناتجة عن كاميرا أو نموذج AI حقيقي.</span></div>
+    <div class="sim">
+      <div class="glass sim-view">
+        <div class="viewport">
+          <canvas id="simCanvas" width="1280" height="720" aria-label="شاشة المحاكاة"></canvas>
+          <span class="vp-state ltr" id="simState">STOPPED</span>
+          <div class="vp-over" id="simToasts" aria-live="polite"></div>
+          <div class="vp-idle" id="simIdle"><div><p>المحاكاة متوقفة. ابدأ لتظهر الأجسام المتحركة.</p><button class="btn primary" id="simStartBig"><svg><use href="#i-play"/></svg>ابدأ المحاكاة</button></div></div>
+        </div>
+        <div class="ctrl-row">
+          <button class="btn sm primary" id="simStart"><svg><use href="#i-play"/></svg><span>ابدأ</span></button>
+          <button class="btn sm" id="simPause" disabled><svg><use href="#i-pause"/></svg><span>إيقاف مؤقت</span></button>
+          <button class="btn sm" id="simReset"><svg><use href="#i-reset"/></svg>إعادة ضبط</button>
+          <label for="simSpeed">السرعة <input type="range" id="simSpeed" min="0.5" max="3" step="0.5" value="1"><span class="mono" id="simSpeedV">1×</span></label>
+        </div>
+        <div class="ctrl-row">
+          <button class="btn sm" id="tBoxes" aria-pressed="true">صناديق الإحاطة</button>
+          <button class="btn sm" id="tIds" aria-pressed="true">معرّفات التتبع</button>
+          <button class="btn sm" id="tLine" aria-pressed="true">الخط الافتراضي</button>
+          <button class="btn sm" id="tZone" aria-pressed="true">المنطقة المحظورة</button>
+          <label for="zonePreset">شكل المنطقة
+            <select id="zonePreset"></select>
+          </label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="glass stats" id="simStats"></div>
+        <div class="glass ids"><h4>المعرّفات المتتبَّعة الآن <span class="mono" style="font-size:11px;color:var(--muted)">conf</span></h4><div class="id-list" id="simIds"></div></div>
+        <div class="glass log"><h4>سجل الأحداث <button class="btn sm" id="logClear">مسح السجل</button></h4><ol id="simLog"></ol></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- F — CAMERA GUIDE -->
+<section id="camera">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">ربط كاميرا حقيقية</div>
+      <h2>دليل توصيل الكاميرا خطوة بخطوة</h2>
+      <p>اختر نوع المصدر. في كل نوع: مسار البيانات، وخطوات التوصيل، وكود اختبار بـ OpenCV، وحلول المشاكل الشائعة.</p>
+    </div>
+    <div class="tabs" role="tablist" id="camTabs" aria-label="نوع الكاميرا"></div>
+    <div class="cam" id="camBody"></div>
+
+    <div class="glass card" style="margin-top:16px">
+      <h3>قيد مهم في المتصفح</h3>
+      <p style="font-size:14.5px;color:var(--fg2)">المتصفحات لا تستطيع عادةً تشغيل بث RTSP خام داخل عنصر <code class="ltr">&lt;video&gt;</code> عادي. لعرض الفيديو المباشر في لوحة ويب نحتاج مكوّناً في الخادم أو بوابة تحوّل البث إلى صيغة يدعمها المتصفح، مثل WebRTC للتأخير المنخفض، أو HLS عندما يكون تأخير بضع ثوانٍ مقبولاً. خدمة الذكاء الاصطناعي تقرأ البث بشكل مستقل، وترسل نتائج الكشف والأحداث المنظمة إلى لوحة التحكم.</p>
+    </div>
+    <h3 style="margin-top:28px;font-size:18px">أمان الكاميرات</h3>
+    <div class="sec-grid">
+      <div class="sec-item"><b>كاميرات مصرّح بها فقط</b><span>استخدم فقط كاميرات وتسجيلات لديك إذن قانوني باستخدامها.</span></div>
+      <div class="sec-item"><b>الأسرار في الخادم</b><span>بيانات الدخول في متغيرات بيئة أو نظام أسرار آمن، ولا تصل للمتصفح أبداً.</span></div>
+      <div class="sec-item"><b>لا ترفع ملف .env</b><span>أضفه إلى <code class="ltr">.gitignore</code>، واستخدم <code class="ltr">.env.example</code> بقيم وهمية.</span></div>
+      <div class="sec-item"><b>قيّد الشبكة</b><span>لا تفتح الكاميرا على الإنترنت مباشرة. استخدم شبكة داخلية أو VPN.</span></div>
+      <div class="sec-item"><b>صادِق المستخدمين</b><span>لوحة التحكم تتطلب تسجيل دخول قبل عرض أي بث أو حدث.</span></div>
+      <div class="sec-item"><b>صلاحيات مناسبة</b><span>المدير وحده يضيف الكاميرات، ويُفضّل حساب «مشاهدة فقط» على الكاميرا نفسها.</span></div>
+      <div class="sec-item"><b>عنوان IP لا يكفي</b><span>إضافة عنوان الكاميرا وحده لا يعني تكاملاً آمناً؛ يلزم تشفير ومصادقة وتقييد.</span></div>
+      <div class="sec-item"><b>سجلات نظيفة</b><span>أخفِ <code class="ltr">user:pass@</code> من أي سطر سجل أو رسالة خطأ.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- G — DASHBOARD -->
+<section id="dashboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">معاينة لوحة التحكم</div>
+      <h2>ما يراه المشغّل في الوقت الفعلي</h2>
+      <p>هذه اللوحة متصلة بالمحاكي في هذه الصفحة. الأرقام تأتي من المحاكاة فقط، وليست من خادم أو قاعدة بيانات حقيقية.</p>
+    </div>
+    <div class="glass dash" id="dash">
+      <div class="dash-top">
+        <div class="ctrl-row"><span class="tag">مصدر البيانات: المحاكي</span><span class="chip" id="dashProc"><i></i>المعالجة متوقفة</span></div>
+        <button class="btn sm" id="dashRun"><svg><use href="#i-play"/></svg><span>تشغيل المحاكي</span></button>
+      </div>
+      <div class="kpis" id="dashKpis"></div>
+      <div class="dash-row">
+        <div class="box chart"><h4>الكشوفات عبر الزمن <span class="mono" style="font-size:11px;color:var(--muted)">آخر 60 ثانية</span></h4><div id="dashChart"></div></div>
+        <div class="box"><h4>الكاميرات <span class="tag">بيانات تجريبية</span></h4><div class="cam-list" id="dashCams"></div></div>
+      </div>
+      <div class="box"><h4>آخر الأحداث</h4><div class="recent" id="dashRecent"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- H — ZONES -->
+<section id="zones">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">المناطق والخطوط الافتراضية</div>
+      <h2>حرّك الخط وعدّل المنطقة، ثم اختبر</h2>
+      <p>اسحب النقاط البيضاء لتحريك طرفي الخط أو رؤوس المنطقة. التعديلات هنا تنطبق على المحاكي أيضاً.</p>
+    </div>
+    <div class="zed">
+      <div class="glass" style="padding:12px">
+        <div class="viewport"><canvas id="zedCanvas" width="1280" height="720" aria-label="محرر المناطق"></canvas></div>
+      </div>
+      <div class="glass zed-side">
+        <div><h4>الأشكال الجاهزة</h4><div class="presets" id="zedPresets" style="margin-top:8px"></div></div>
+        <div class="ctrl-row">
+          <button class="btn sm" id="zLine" aria-pressed="true">الخط</button>
+          <button class="btn sm" id="zZone" aria-pressed="true">مراقبة المنطقة</button>
+        </div>
+        <div class="ctrl-row">
+          <button class="btn sm primary" id="zTest"><svg><use href="#i-play"/></svg>أرسل جسم اختبار</button>
+          <button class="btn sm" id="zReset"><svg><use href="#i-reset"/></svg>الوضع الافتراضي</button>
+        </div>
+        <div><h4>نتيجة الاختبار</h4><div class="mini-log" id="zedLog" style="margin-top:8px"></div></div>
+        <div class="note info"><span>القواعد تعمل على موضع الجسم المتتبَّع وليس على البكسلات. نستخدم <b>منتصف الحافة السفلية</b> للصندوق كنقطة مرجعية، ونحدد <b>اتجاه العبور</b> من جانب النقطة، ونمنع <b>التكرار</b> بهامش حول الخط وفترة تهدئة لكل معرّف.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- I — TECH -->
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">التقنيات</div>
+      <h2>لماذا اخترنا كل تقنية</h2>
+      <p>اضغط على أي بطاقة لترى ما تستقبله التقنية وما تُخرجه. هذه هي التقنيات المقترحة للنظام الكامل، والموقع الحالي لا يشغّلها.</p>
+    </div>
+    <div class="techs" id="techs"></div>
+  </div>
+</section>
+
+<!-- J — DB -->
+<section id="db">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">قاعدة البيانات</div>
+      <h2>المخطط المقترح للجداول والعلاقات</h2>
+      <p>اضغط على أي جدول لإبراز علاقاته. <span class="tag">مخطط مقترح</span> لا يحفظ هذا الموقع أي بيانات في MySQL.</p>
+    </div>
+    <div class="db">
+      <div class="glass db-stage"><svg id="dbSvg" viewBox="0 0 1000 560" role="img" aria-label="مخطط قاعدة البيانات"></svg></div>
+      <aside class="glass db-panel" id="dbPanel" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
+<!-- K — API -->
+<section id="api">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">التواصل عبر API</div>
+      <h2>رحلة الطلب بين Python و Laravel و React</h2>
+      <p>اختر مساراً لترى الطلب والاستجابة. <span class="tag">مقترح — غير منفّذ</span> كل المسارات هنا أمثلة تصميم، ولا يوجد خادم يستقبلها في هذا الموقع.</p>
+    </div>
+    <div class="api">
+      <div class="glass ep-list" id="epList" role="tablist" aria-label="المسارات"></div>
+      <div class="glass api-main">
+        <div class="api-flow"><svg id="apiSvg" viewBox="0 0 760 150" role="img" aria-label="تدفق الطلب"></svg></div>
+        <div class="api-meta" id="apiMeta"></div>
+        <div class="io-grid">
+          <div class="code-box"><span class="lbl" style="font-size:12px;color:var(--muted);font-family:var(--f-mono);display:block;margin-bottom:6px">REQUEST</span><pre class="code" id="apiReq"></pre></div>
+          <div class="code-box"><span class="lbl" style="font-size:12px;color:var(--muted);font-family:var(--f-mono);display:block;margin-bottom:6px">RESPONSE</span><pre class="code" id="apiRes"></pre></div>
+        </div>
+        <div class="api-notes">
+          <div><b>المصادقة</b><span>طلبات اللوحة تحمل توكن مستخدم، وطلبات خدمة Python تحمل مفتاح خدمة منفصل في ترويسة. أي طلب بدونه يرجع 401.</span></div>
+          <div><b>التحقق والأخطاء</b><span>Laravel يتحقق من كل حقل. البيانات الناقصة ترجع 422 مع وصف كل خطأ، وتعطّل خدمة يرجع 503 برسالة واضحة.</span></div>
+          <div><b>وصول التحديثات</b><span>اللوحة تجلب البيانات دورياً (Polling)، أو تستقبل الأحداث فور حدوثها عبر WebSocket أو SSE.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- L — TESTING -->
+<section id="testing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">الاختبار والأداء</div>
+      <h2>قائمة اختبار تفاعلية</h2>
+      <p>علّم كل حالة بعد اختبارها فعلياً. التقدم يُحفظ في متصفحك فقط.</p>
+    </div>
+    <div class="test">
+      <div class="glass checklist" id="checklist"></div>
+      <div class="test-side">
+        <div class="glass ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="10"/><circle id="ringArc" cx="60" cy="60" r="50" fill="none" stroke="url(#rg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .5s"/><defs><linearGradient id="rg"><stop offset="0" stop-color="#087FF5"/><stop offset="1" stop-color="#00D9FF"/></linearGradient></defs><text id="ringPct" class="pct" x="60" y="70" text-anchor="middle">0%</text></svg>
+          <span id="ringTxt" style="font-size:13.5px;color:var(--soft)">0 من 14 حالة</span>
+          <button class="btn sm" id="checkReset"><svg><use href="#i-reset"/></svg>إلغاء كل العلامات</button>
+        </div>
+        <div class="glass metrics">
+          <h4 style="font-size:14px">مصطلحات الأداء</h4>
+          <div class="metric"><b>FPS</b><span>عدد الإطارات التي يعالجها النظام في الثانية. كلما زاد، كانت المتابعة أكثر سلاسة.</span></div>
+          <div class="metric"><b>Inference latency</b><span>الزمن الذي يستغرقه النموذج لتحليل إطار واحد. مثال توضيحي: 45 مللي ثانية تعني حوالي 22 إطاراً في الثانية كحد أقصى.</span></div>
+          <div class="metric"><b>End-to-end latency</b><span>الزمن من لحظة التقاط الإطار حتى ظهور الحدث في اللوحة، ويشمل الشبكة والمعالجة والحفظ.</span></div>
+          <div class="metric"><b>Confidence</b><span>رقم بين 0 و 1 يعبّر عن ثقة النموذج في الكشف. 0.87 تعني ثقة عالية، وليست احتمال صحة مضموناً.</span></div>
+          <div class="note"><span>لا نعرض أرقام أداء مقاسة هنا. أي رقم يُكتب في التقرير يجب قياسه على جهازك مع ذكر المواصفات ودقة الفيديو.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M — LIMITS -->
+<section id="limits">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">القيود والتطوير المستقبلي</div>
+      <h2>ما يجب أن نعرفه عن حدود النظام</h2>
+    </div>
+    <div class="limits">
+      <div class="glass card"><h3>التحديات الواقعية</h3><ul id="limitsList"></ul></div>
+      <div class="glass card"><h3>التطوير المستقبلي</h3><ul id="futureList"></ul></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>نظام المراقبة الذكي وتتبع الأجسام — مشروع تخرج</span>
+    <span>كل البيانات والحركة في هذا الموقع محاكاة تعليمية.</span>
+  </div>
+</footer>
+
+<!-- N — PRESENTATION -->
+<div class="pres" id="pres" hidden role="dialog" aria-modal="true" aria-label="وضع العرض">
+  <div class="pres-top"><span class="mono" id="presCount">1 / 10</span><button class="btn sm" id="presExit">إنهاء العرض</button></div>
+  <div class="slide" id="presSlide"></div>
+  <div class="pres-bot">
+    <button class="btn" id="presPrev"><svg><use href="#i-prev"/></svg>السابق</button>
+    <div class="dots" id="presDots"></div>
+    <div class="ctrl-row"><a class="btn sm" id="presGo" href="#top">افتح القسم</a><button class="btn primary" id="presNext">التالي<svg><use href="#i-next"/></svg></button></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
